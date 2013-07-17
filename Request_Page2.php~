@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Check_Prereqs</title>
+<link href="http://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700" rel="stylesheet" type="text/css" />
+<link href="students.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+<body>
+<?php
+	/**
+		Need to
+			1) Pull out the course sent by request Page 1b. --- DONE
+				1a) make a bool flag for all prereqs grades, isFailed default to false --- DONE
+			2) Check the prereqs for this course, store in string. e.g. "198:112, 198:111" -- DONE
+			3) Tokenize the string and store each number as a prereq variable - DONE
+					4) for each prereq variable extract dept (first num), and course (second num) DONE
+					5) Look up the grades for this prereq in the registered database where taken by student
+					6) If any grade == F, set a bool flag to true
+			7) If (isFailed)
+				display error
+		 	8) else
+				 header( 'Location.....) redirect to Request page3.php - major info
+	 **/
+					
+				
+	include 'connect.php';
+		session_start();
+	$dept = $_SESSION['deptdropdown'];
+	$course = $_SESSION['coursedropdown'];
+	$ruid = $_SESSION['ruid'];
+	$_SESSION['sectiondropdown'] = $_POST[sectiondropdowns];
+	$section = $_POST[sectiondropdowns];
+	$isFailed = FALSE;
+	//$query = "SELECT * FROM courses WHERE section_number = '$section' AND course_title = '$course'";
+	$sql = mysql_query("SELECT * FROM courses WHERE section_number = '$section' AND course_title = '$course'");
+	//echo "sql query is $query";
+	while($row = mysql_fetch_array($sql))
+		{	
+			//echo "reaches here";
+			$prereq_string = $row['prereqs'];
+			echo "prereq string is $prereq_string <br>";
+			$prereq = strtok($prereq_string, " ,");
+			while($prereq !== false){
+				echo "prereq = $prereq<br />";
+				// assuming all the data is entered in correctly
+				$reqdept = substr($prereq, 0, 3);;
+				$reqcourse = str_split($prereq, -3);
+				echo "reqdept = $reqdept <br>";
+				echo "reqquorse = $reqcourse <br>";
+				// Check if they failed the course
+				$query2 = "SELECT * FROM registeration WHERE dept = '$reqdept' AND course_number = '$reqcourse' AND ruid='$ruid'";
+				$check = mysql_query($query2);
+				$temp = mysql_fetch_array($check)
+				if($temp['grade'] == "F"){
+					isFailed = TRUE;
+				}	
+				$prereq = strtok(" ,");
+			}
+		}
+	
+	echo $isFailed ? 'true' : 'false';
+	//if(!$sql){
+	//	echo "<CENTER> An error occured while trying to delete the course request. <BR>";
+	//}
+	//header( 'Location: View_Requests.php');
+ ?>
+</body>
+</html>

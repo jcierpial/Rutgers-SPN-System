@@ -1,0 +1,12 @@
+198|111|01|Intro to Computer Science||instructor|10|100
+198|111|02|Intro to Computer Science||instructor|10|100
+198|111|03|Intro to Computer Science||instructor|10|100
+198|111|04|Intro to Computer Science||instructor|10|100
+198|112|01|Data Structures|198:111|instructor|10|50
+198|112|02|Data Structures|198:111|instructor|10|50
+198|205|01|Discrete Structures I||instructor|5|25
+198|205|02|Discrete Structures I||instructor|5|25
+198|206|01|Discrete Structures II|198:205|instructor|5|25
+198|206|02|Discrete Structures II|198:205|instructor|5|25
+198|211|01|Computer Architecture I|198:112|instructor|10|50
+198|214|01|Systems Programming|198:112,198:205|instructor|10|50

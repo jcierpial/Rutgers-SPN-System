@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Registration</title>
+<link href="http://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700" rel="stylesheet" type="text/css" />
+<link href="students.css" rel="stylesheet" type="text/css" media="all" />
+
+<script type="text/javascript">
+	function validate(){
+		var error = "You are missing the following fields.\nPlease make sure to fill them \nbefore submitting again: \n \n";
+		var ismissing = false;
+		if(document.form1.netID.value == ""){
+			ismissing = true;
+			error = error + "netID \n";
+		}
+		if(document.form1.password.value == ""){
+			ismissing = true;
+			error = error + "Password \n";
+		}
+		if(document.form1.firstname.value == ""){
+			ismissing = true;
+			error = error + "First Name \n";
+		}
+		if(document.form1.lastname.value == ""){
+			ismissing = true;
+			error = error + "Last Name \n";
+		}
+		if(document.form1.ruid.value == ""){
+			ismissing = true;
+			error = error + "RUID \n";
+		}
+		if(document.form1.email.value == ""){
+			ismissing = true;
+			error = error + "Email \n";
+		}
+		if(ismissing){
+			alert(error);
+			return false;
+		}else{
+			//document.form1.submit();
+			return true;
+		}
+	}
+</script>
+</head>
+
+<body>
+<center><p><font size="+3"><strong>Registration - Basic Information</strong></font></p><hr />
+<p>Please make sure to fill in ALL fields before continuing. 
+</p></center>
+
+<form name="form1" action="register.php" method="post" onsubmit="return validate()"><br>
+			  <div id="content2">
+  <table width="70%" align="center" border="1" cellpadding="0" cellspacing="0"> 
+    <tr>
+      <th width="200" scope="row">NetID</th>
+      <td width="150">
+        <input type="text" name="netID"/>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Password</th>
+      <td>
+        <input type="password" name="password"/>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">First Name</th>
+      <td>
+        <input type="text" name="firstname"/>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Last Name</th>
+      <td>
+        <input type="text" name="lastname"/>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">RUID (If professor: simply enter 0)</th>
+      <td>
+        <input type="text" name="ruid"/>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Email</th>
+      <td>
+        <input type="text" name="email"/>
+      </td>
+    </tr>
+    <tr>
+     <th scope="row"> Classification Level</th>
+     <td>
+        <select name="auth">
+        	<option value="1">Student</option>
+            <option value="2">Teacher</option>
+        </select>
+      </td>
+      </tr>
+    <tr>
+      <th scope="row" colspan=2>
+        <input type="submit" name="registration1" value="Finish""/>
+      </th>
+    </tr>
+  </table>
+  </form>
+</body>
+</html>
